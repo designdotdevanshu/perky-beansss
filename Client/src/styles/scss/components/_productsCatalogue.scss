@@ -1,0 +1,348 @@
+@use "../abstracts" as *;
+
+.loadingBTN{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column !important;
+  gap: 0 !important;
+  color: white;
+  button{
+    background-color: #ecb014;
+    padding: 4px 10px;
+    color: white;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin-top: 5px;
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.848);
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.215);
+      color: black;
+    }
+  }
+}
+
+.products {
+  position: relative;
+  top: pxToRem(100);
+  padding-bottom: 10px;
+  @include flexMixin();
+  flex-wrap: wrap;
+  width: 98vw;
+  margin: auto;
+  min-height: 300px;
+  gap: 20px 10px;
+  margin-top: 100px;
+  
+  
+  
+  #Product-Image-Link {
+    width: 100%;
+  }
+
+  .skeleton, .product-image {
+    width: 100%;
+    height: pxToRem(290);
+    object-fit: cover;
+    border-radius: 18px 18px 0 90px;
+  }
+
+  .product-card {
+    background-color: $color-primary;
+    @include flexMixin($JScontent: flex-start, $direction: column);
+    align-self: normal;
+    overflow: hidden;
+    border: 2px solid rgb(255, 255, 255);
+    width: pxToRem(220);
+    padding-bottom: 30px;
+    border-radius: 25px;
+    position: relative;
+    
+    #product-type{
+      top: 10px;
+      left: 10px;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      border-radius: 5px;
+      
+      #veg{
+        background-color: white;
+        border: 2px solid white;
+        width: 100%;
+        height: 100%;
+      }
+
+      span{
+        width: 100%;
+        height: 100%;
+        // border-radius: 50%;
+        // z-index: 999;
+        box-shadow: 0 0 4px rgba(128, 128, 128, 0.24);
+      }
+      
+      #LuVegan {
+        width: 100%;
+        height: 100%;
+        background-color: white;
+        border: 2px solid white;
+        color: green;
+      }
+
+    }
+
+    #product-img-BTN1, #product-img-BTN2 {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      color: white;
+
+      #onhover-showBTN1, #onhover-showBTN2 {
+        @include flexMixin($JScontent: flex-end);
+        background-color: rgba(0, 0, 0, 0.653);
+        border-radius: 50px;
+        margin-bottom: 4px;
+        cursor: pointer;
+      }
+      span{
+        @include flexMixin($JScontent: flex-end);
+        border-radius: 50px;
+        // margin-bottom: 4px;
+        height: 22px;
+        width: 22px;
+        // z-index: 999;
+        box-shadow: 0 0 4px rgba(128, 128, 128, 0.24);
+      }
+      
+      #bag-para, #wishlist-para {
+        display: none;
+        font-size: 8px;
+        font-weight: 600;
+      }
+
+      svg {
+        font-size: 24px;
+        cursor: pointer;
+        border-radius: 50%;
+        padding: 3px;
+      }
+
+      .active-Heart, .heart:hover {
+        color: red;
+      }
+
+      .bag:hover, .active-Bags {
+        color: #ecb014;
+      }
+
+      #onhover-showBTN1:hover #wishlist-para {
+        display: block;
+        padding-right: 2px;
+        padding-left: 8px;
+      }
+
+      #onhover-showBTN2:hover #bag-para {
+        display: block;
+        padding-right: 1px;
+        padding-left: 8px;
+      }
+    }
+    #product-img-BTN2{
+      top: 45px;
+    }
+  }
+
+
+
+  .product-info {
+    @include flex-center(column);
+    color: black;
+    padding: 10px 6px;
+    
+    .product-name {
+      width: 100%;
+      font-size: 14px;
+      font-weight: bolder;
+      text-align: center;
+      margin-bottom: 4px;
+      span{
+        height: 16px;
+      }
+    }
+    
+    .product-desc {
+      width: 95%;
+      text-align: justify;
+      margin: 0 8px;
+    }
+
+    .product-price {
+      align-items: center;
+      font-size: 20px;
+      font-weight: bolder;
+      @include margin-x(30px);
+      position: absolute;
+      bottom: 12px;
+      width: 20%;
+      span{
+        width: 100%;
+        height: 22px
+      }
+    }
+
+    #rating {
+      @include flexMixin();
+      position: absolute;
+      right: 10px;
+      bottom: 4px;
+      width: 30%;
+      span{
+        width: 100%;
+      }
+
+      #A {
+        color: #b89130;
+        font-size: 12px;
+        margin-right: 2px;
+      }
+
+      .product-rating {
+        color: #1e1305;
+        font-size: 10px;
+        font-weight: bold;
+        margin-right: 4px;
+        display: flex;
+        align-items: start;
+      }
+    }
+
+    p {
+      font-size: 12px;
+      font-weight: normal;
+    }
+  }
+}
+
+#pagination {
+  @include flexMixin();
+  position: relative;
+  top: 8rem;
+  gap: 10px;
+  color: white;
+
+  .Pages {
+    @include flexMixin();
+    width: 25px;
+    height: 25px;
+    border: 1px solid #ecb014;
+    font-weight: 900;
+    // border-radius: 50%;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .activePage {
+    background-color: #ecb014;
+  }
+
+  #non-active-side-btn {
+    opacity: 0.5;
+    // svg{
+    //   color: grey;
+    // }
+  }
+}
+
+@media (max-width: 1000px) {
+  .products {
+    width: 100vw;
+    // margin-top: 5vh;
+    margin-top: 100px;
+
+    .product-card {
+      width: pxToRem(200);
+
+      .skeleton, .product-image {
+        height: 260px;
+      }
+    }
+  }
+}
+
+@media (max-width: 840px) {
+  .products {
+    margin-top: -55px !important;
+
+    .product-card {
+      width: pxToRem(200);
+
+      .skeleton, .product-image {
+        height: 220px;
+      }
+    }
+  }
+}
+
+@media (max-width: 620px) {
+  .products {
+    margin: auto;
+
+    .product-card {
+      width: 45vw;
+
+      .skeleton, .product-image  {
+        height: 140px;
+        border-bottom-left-radius: 50px;
+      }
+
+      .product-info {
+        .product-name {
+          font-size: 12px;
+        }
+
+        .product-desc {
+          margin: 0 4px;
+        }
+
+        .product-price {
+          font-size: 18px;
+        }
+
+        #rating {
+          @include flexMixin(flex-start);
+          position: absolute;
+          right: 10px;
+          bottom: 4px;
+
+          #A {
+            color: #b89130;
+            font-size: 14px;
+            margin-right: 2px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@include responsive(tab-land) {
+  .products {
+    width: 100vw;
+    // margin: auto;
+    margin-top: 100px;
+    // background-color: $color-primary;
+  }
+}
+
+
+@keyframes skeleton-loading {
+  0% {
+    // background-color: hsl(200,20%,70%);
+    background-color: #c2c2c2;
+  }
+
+  100% {
+    // background-color: hsl(200,20%,95%);
+    background-color: #ffffff;
+  }
+}
