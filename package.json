@@ -13,7 +13,7 @@
     "frontend:build": "yarn workspace frontend build",
     "dev": "yarn workspace backend dev & yarn workspace frontend dev",
     "build": "yarn workspace frontend build",
-    "start": "yarn workspace backend start & yarn workspace frontend start",
+    "start": "yarn workspace backend start",
     "install-all": "yarn install"
   },
   "workspaces": [
