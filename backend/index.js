@@ -4,11 +4,14 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const { default: mongoose } = require("mongoose");
 
+require("dotenv").config();
+
 const app = express();
-const PORT = process.env.PORT || 5000;
+const port = process.env.PORT || 5000;
 const env = process.env.NODE_ENV;
 
-require("dotenv").config();
+// Define the path to the frontend dist directory
+const frontendDistPath = path.join(__dirname, "..", "frontend", "dist");
 
 mongoose
   .connect(process.env.MONGO_URI, {
@@ -22,12 +25,17 @@ mongoose
     console.log("Database ERROR", err);
   });
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    // credentials: true,
+  }),
+);
 
 if (env === "DEVELOPMENT") {
-app.use(require("./routes/gateway/webHook"));
+  app.use(require("./routes/gateway/webHook"));
 } else {
-  app.use('/api',require("./routes/gateway/webHook"));
+  app.use("/api", require("./routes/gateway/webHook"));
 }
 
 // Cokkies Creation
@@ -43,19 +51,23 @@ if (env === "DEVELOPMENT") {
   app.use(`/api`, require("./routes/index"));
 }
 
-// app.use(require("./auth"));
+app.use(require("./auth"));
 
-app.use(express.static(path.resolve(__dirname, "Client", "docs")));
+app.use(express.static(frontendDistPath));
+
+app.get("/healthz", (req, res) => {
+  res.status(200).send("Server is running");
+});
 
 app.get("/", (req, res) => {
-  console.log(path.resolve(__dirname, "Client", "docs"));
-  res.status(200).sendFile(path.resolve(__dirname, "Client", "docs"));
+  res.status(200).sendFile(frontendDistPath);
 });
 
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname + "/Client/docs/index.html"));
+  res.sendFile(path.join(frontendDistPath, "index.html"));
 });
 
-app.listen(PORT, () => {
-  console.log("Server Connected 5000");
+app.listen(port, () => {
+  console.log(`Serving static files from: ${frontendDistPath}`);
+  console.log(`Server is running on http://localhost:${port}`);
 });
