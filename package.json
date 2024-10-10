@@ -12,9 +12,9 @@
     "backend:build": "yarn workspace backend build",
     "frontend:build": "yarn workspace frontend build",
     "dev": "yarn workspace backend dev & yarn workspace frontend dev",
+    "install-all": "yarn install",
     "build": "yarn workspace frontend build",
-    "start": "yarn workspace backend start",
-    "install-all": "yarn install"
+    "start": "yarn workspace backend start"
   },
   "workspaces": [
     "backend",
